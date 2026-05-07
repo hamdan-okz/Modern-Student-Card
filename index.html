@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Student Card</title>
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form */
+.form {
+  background: rgba(255,255,255,0.1);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+input {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  width: 220px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+button {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: #00c6ff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0072ff;
+}
+
+/* Card */
+.card {
+  width: 380px;
+  height: 180px;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  color: #333;
+  display: none;
+  overflow: hidden;
+  animation: fadeIn 0.6s ease-in-out;
+  position: relative;
+}
+
+/* Header strip */
+.card-header {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  padding: 8px 15px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Layout */
+.card-body {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+/* Avatar */
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+/* Info */
+.info h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #2a5298;
+}
+
+.info p {
+  margin: 3px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* ID Badge */
+.badge {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  background: #00c6ff;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="form">
+  <input type="text" id="name" placeholder="Name">
+  <input type="number" id="age" placeholder="Age">
+  <input type="text" id="class" placeholder="Class">
+  <button onclick="generateCard()">Generate</button>
+</div>
+
+<div class="card" id="card">
+  <div class="card-header">STUDENT ID CARD</div>
+  <div class="card-body">
+    <div class="avatar" id="avatar">A</div>
+    <div class="info">
+      <h2 id="cardName"></h2>
+      <p id="cardAge"></p>
+      <p id="cardClass"></p>
+      <p id="cardID"></p>
+    </div>
+  </div>
+  <div class="badge" id="badge">ID-0000</div>
+</div>
+
+<script>
+function generateCard() {
+  let name = document.getElementById("name").value;
+  let age = document.getElementById("age").value;
+  let studentClass = document.getElementById("class").value;
+
+  if (!name || !age || !studentClass) {
+    alert("Fill all fields!");
+    return;
+  }
+
+  document.getElementById("cardName").textContent = name;
+  document.getElementById("cardAge").textContent = "Age: " + age;
+  document.getElementById("cardClass").textContent = "Class: " + studentClass;
+
+  let id = "ID-" + Math.floor(1000 + Math.random() * 9000);
+  document.getElementById("cardID").textContent = "Student No: " + id;
+  document.getElementById("badge").textContent = id;
+
+  document.getElementById("avatar").textContent = name.charAt(0).toUpperCase();
+
+  document.getElementById("card").style.display = "block";
+}
+</script>
+
+</body>
+</html>
